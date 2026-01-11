@@ -1,6 +1,7 @@
 ---
 const accessKey = import.meta.env.PUBLIC_ACCESS_KEY;
 ---
+
 <section id="contact" class="contact">
     <div class="container">
         <div class="section-header">
@@ -17,6 +18,7 @@ const accessKey = import.meta.env.PUBLIC_ACCESS_KEY;
                         <p>Gangtok, India 737101</p>
                     </div>
                 </div>
+                
                 <div class="contact-item fade-in">
                     <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                     <div class="contact-text">
@@ -24,17 +26,31 @@ const accessKey = import.meta.env.PUBLIC_ACCESS_KEY;
                         <p>dorjeepalzang13@gmail.com</p>
                     </div>
                 </div>
+                    
+                    <div class="contact-item fade-in action-trigger" data-type="phone" data-link="tel:+918918728311">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p>+91 8918728311</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item fade-in action-trigger" data-type="whatsapp" data-link="https://wa.me/918918728311">
+                        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-text">
+                            <h4>WhatsApp</h4>
+                            <p>Chat Now</p>
+                        </div>
+                    </div>
+                
             </div>
 
             <div class="contact-form fade-in">
                 <div class="floating-card">
                     <h3 style="margin-bottom: 20px;">Send me a message</h3>
-                    
                     <form action="https://api.web3forms.com/submit" method="POST" id="form">
                         <input type="hidden" name="access_key" value={accessKey}>
-                        
                         <input type="hidden" name="redirect" value="https://dpalzang.github.io">
-
                         <div style="margin-bottom: 20px;">
                             <input type="text" name="name" placeholder="Your Name" required
                                 style="width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white; outline: none;">
@@ -55,4 +71,177 @@ const accessKey = import.meta.env.PUBLIC_ACCESS_KEY;
             </div>
         </div>
     </div>
+
+    <div id="confirmModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modalTitle">Confirm Action</h3>
+            <p id="modalMessage">Are you sure you want to proceed?</p>
+            <div class="modal-buttons">
+                <button id="cancelBtn" class="btn-cancel">Cancel</button>
+                <button id="confirmBtn" class="btn-confirm">Open App</button>
+            </div>
+        </div>
+    </div>
 </section>
+
+<style>
+    /* LAYOUT FIX: 
+       Puts the two items side by side. 
+       Uses gap to separate them.
+    */
+    .contact-group {
+        display: flex;
+        gap: 15px;
+        width: 100%;
+    }
+
+    /* Ensure they take up equal space */
+    .contact-group .contact-item {
+        flex: 1;
+        /* We do NOT add padding here to preserve original style */
+    }
+
+    /* Only visual change is the cursor for interactive elements */
+    .action-trigger {
+        cursor: pointer;
+    }
+
+    .action-trigger:hover {
+        opacity: 0.9; /* Subtle hover effect that won't break layout */
+    }
+
+    /* WhatsApp Icon specific color */
+    .contact-icon i.fa-whatsapp {
+        color: #25D366; 
+    }
+
+    /* Mobile Responsive: Stack them on very small screens */
+    @media (max-width: 480px) {
+        .contact-group {
+            flex-direction: column;
+        }
+    }
+
+    /* --- Modal Styles (New, does not affect original layout) --- */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal-content {
+        background: #1a1a1a;
+        border: 1px solid rgba(255,255,255,0.1);
+        padding: 2rem;
+        border-radius: 15px;
+        max-width: 90%;
+        width: 400px;
+        text-align: center;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+
+    .modal-overlay.active .modal-content {
+        transform: scale(1);
+    }
+
+    .modal-content h3 {
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    .modal-content p {
+        color: #ccc;
+        margin-bottom: 25px;
+    }
+
+    .modal-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .btn-confirm, .btn-cancel {
+        padding: 10px 25px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: opacity 0.2s;
+    }
+
+    .btn-confirm {
+        background: #007bff;
+        color: white;
+    }
+    
+    .btn-cancel {
+        background: rgba(255,255,255,0.1);
+        color: white;
+    }
+
+    .btn-confirm:hover, .btn-cancel:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<script>
+    let targetLink = '';
+    const modal = document.getElementById('confirmModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    document.querySelectorAll('.action-trigger').forEach(item => {
+        item.addEventListener('click', () => {
+            const type = item.getAttribute('data-type');
+            targetLink = item.getAttribute('data-link');
+
+            if (type === 'phone') {
+                modalTitle.textContent = 'Make a Call';
+                modalMessage.textContent = 'Do you want to open your phone app to call +91 8918728311?';
+            } else if (type === 'whatsapp') {
+                modalTitle.textContent = 'Open WhatsApp';
+                modalMessage.textContent = 'Do you want to open WhatsApp to chat?';
+            }
+
+            modal.classList.add('active');
+        });
+    });
+
+    confirmBtn.addEventListener('click', () => {
+        if (targetLink) {
+            window.open(targetLink, '_blank');
+        }
+        modal.classList.remove('active');
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        targetLink = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+</script>
