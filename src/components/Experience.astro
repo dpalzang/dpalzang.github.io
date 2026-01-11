@@ -1,0 +1,269 @@
+<section id="experience" class="experience">
+    <div class="container">
+        <div class="section-header">
+            <h2>Professional Journey</h2>
+            <p>From enterprise financial systems to esports journalism</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="role-header">
+                        <div class="role-icon"><i class="fas fa-building"></i></div>
+                        <div>
+                            <h3>Full Stack Developer</h3>
+                            <h4>NICSI, Gangtok</h4>
+                        </div>
+                        <span class="timeline-date">Present</span>
+                    </div>
+                    <ul class="role-details">
+                        <li>Developer for <strong>Project PRANALI</strong> managing payroll for 80,000+ state government employees.</li>
+                        <li>Developed OMMAS integration for Rural Development Department.</li>
+                        <li>Single-handedly built end-to-end modules for bills and payments.</li>
+                    </ul>
+                    <div class="role-tags">
+                        <span>Angular</span><span>.NET</span><span>SQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="role-header">
+                        <div class="role-icon"><i class="fas fa-landmark"></i></div>
+                        <div>
+                            <h3>Full Stack Intern</h3>
+                            <h4>Finance Dept, Sikkim Govt</h4>
+                        </div>
+                        <span class="timeline-date">2024 - 2025</span>
+                    </div>
+                    <ul class="role-details">
+                        <li>Developed File Tracking system for State Treasury.</li>
+                        <li>Refactored API code to reduce database query times by 20%.</li>
+                    </ul>
+                    <div class="role-tags">
+                        <span>Angular</span><span>Bootstrap</span><span>API Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="role-header">
+                        <div class="role-icon"><i class="fas fa-pen-nib"></i></div>
+                        <div>
+                            <h3>Esports Journalist</h3>
+                            <h4>AFK Gaming</h4>
+                        </div>
+                        <span class="timeline-date">2023 - 2024</span>
+                    </div>
+                    <ul class="role-details">
+                        <li>Published 900+ articles reaching 1M+ monthly readers.</li>
+                        <li>Interviewed professional Dota 2 players for technical deep-dives.</li>
+                    </ul>
+                    <div class="role-tags">
+                        <span>SEO</span><span>Content</span><span>Analysis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .experience {
+        padding: 100px 0;
+        position: relative;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    /* The Center Line */
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -1px;
+    }
+
+    .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        background-color: inherit;
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    /* Place items on left or right */
+    .timeline-item:nth-child(odd) { left: 0; }
+    .timeline-item:nth-child(even) { left: 50%; }
+
+    /* The Card Box */
+    .timeline-content {
+        background: var(--card-bg, rgba(30, 41, 59, 0.4));
+        border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+        border-radius: 16px;
+        padding: 25px;
+        backdrop-filter: blur(10px);
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+
+    .timeline-content:hover {
+        transform: translateY(-5px);
+        border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    /* The Dot on the Line */
+    .timeline-content::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background: var(--secondary, #0f172a);
+        border: 3px solid var(--primary, #2563eb);
+        top: 30px;
+        border-radius: 50%;
+        z-index: 1;
+        /* Position logic handled below */
+    }
+
+    /* Dot position for Left items */
+    .timeline-item:nth-child(odd) .timeline-content::after {
+        right: -49px;
+    }
+
+    /* Dot position for Right items */
+    .timeline-item:nth-child(even) .timeline-content::after {
+        left: -49px;
+    }
+
+    /* Role Header */
+    .role-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 15px;
+    }
+
+    .role-icon {
+        width: 45px;
+        height: 45px;
+        background: rgba(37, 99, 235, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary, #2563eb);
+        font-size: 1.2rem;
+    }
+
+    .role-header h3 {
+        font-size: 1.1rem;
+        margin: 0;
+        color: white;
+    }
+
+    .role-header h4 {
+        font-size: 0.9rem;
+        margin: 0;
+        color: #94a3b8;
+        font-weight: 400;
+    }
+
+    .timeline-date {
+        margin-left: auto;
+        font-size: 0.8rem;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary, #2563eb);
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+    }
+
+    .role-details {
+        padding-left: 20px;
+        color: #cbd5e1;
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    .role-details li {
+        margin-bottom: 8px;
+    }
+
+    .role-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .role-tags span {
+        font-size: 0.75rem;
+        padding: 4px 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+        color: #94a3b8;
+        transition: all 0.2s;
+    }
+
+    .role-tags span:hover {
+        background: rgba(37, 99, 235, 0.2);
+        color: white;
+    }
+
+    /* === MOBILE RESPONSIVENESS === */
+    @media (max-width: 768px) {
+        .timeline::after {
+            left: 31px; /* Move line to left */
+        }
+
+        .timeline-item {
+            width: 100%;
+            padding-left: 70px;
+            padding-right: 25px;
+        }
+
+        .timeline-item:nth-child(odd), 
+        .timeline-item:nth-child(even) {
+            left: 0;
+        }
+
+        /* Fix Dot Alignment for Mobile */
+        .timeline-item:nth-child(odd) .timeline-content::after,
+        .timeline-item:nth-child(even) .timeline-content::after {
+            left: -48px;
+            right: auto;
+        }
+        
+        .role-header {
+            align-items: flex-start;
+        }
+        
+        .timeline-date {
+            margin-left: 0;
+            margin-top: 10px;
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+    }
+</style>

@@ -52,11 +52,8 @@
                     <div class="cat-leg back-right"></div>
                     <div class="cat-leg front-left"></div>
                     <div class="cat-leg front-right"></div>
-                    
                     <div class="cat-tail"></div>
-                    
                     <div class="cat-body"></div>
-                    
                     <div class="cat-head">
                         <div class="cat-ear left"></div>
                         <div class="cat-ear right"></div>
@@ -68,9 +65,9 @@
 </section>
 
 <script>
-    // --- 1. Text Animation Logic ---
-    const line1 = document.querySelector('.line-1');
-    const line2 = document.querySelector('.line-2');
+    // FIX: We cast elements 'as HTMLElement' so TypeScript knows they have style properties
+    const line1 = document.querySelector('.line-1') as HTMLElement;
+    const line2 = document.querySelector('.line-2') as HTMLElement;
     
     setTimeout(() => {
         if(line1) line1.classList.remove('initial-load');
@@ -95,16 +92,16 @@
         }
     });
 
-    // --- 2. High-Performance Cat Interaction ---
-    const strayCat = document.querySelector('.stray-cat');
-    const heroVisual = document.querySelector('.hero-visual');
+    // --- High-Performance Cat Interaction ---
+    const strayCat = document.querySelector('.stray-cat') as HTMLElement;
+    const heroVisual = document.querySelector('.hero-visual') as HTMLElement;
 
     if (strayCat && heroVisual) {
         let catIsRunning = true;
         let catDirection = 1;
 
         heroVisual.addEventListener('click', function (e) {
-            const target = e.target;
+            const target = e.target as HTMLElement;
             // Prevent interaction if clicking the card
             if (!target.closest('.floating-card')) {
                 const rect = this.getBoundingClientRect();
@@ -121,7 +118,7 @@
                 strayCat.style.transform = `scaleX(${catDirection})`;
 
                 // Fast sprint to location
-                strayCat.style.transition = 'left 0.8s ease-out, top 0.8s ease-out';
+                strayCat.style.transition = 'left 0.6s ease-out, top 0.6s ease-out';
                 strayCat.style.left = x + 'px';
                 strayCat.style.top = y + 'px';
 
@@ -136,7 +133,7 @@
                         // Keep direction but resume global animation
                         strayCat.style.transform = ''; 
                     }, 500);
-                }, 800);
+                }, 600);
             }
         });
 
@@ -144,21 +141,21 @@
         strayCat.addEventListener('mouseenter', () => {
             if (catIsRunning) {
                 strayCat.style.animationPlayState = 'paused';
-                const head = strayCat.querySelector('.cat-head');
+                const head = strayCat.querySelector('.cat-head') as HTMLElement;
                 if(head) head.style.transform = 'rotate(15deg) translateY(-2px)';
             }
         });
 
         strayCat.addEventListener('mouseleave', () => {
             strayCat.style.animationPlayState = 'running';
-            const head = strayCat.querySelector('.cat-head');
+            const head = strayCat.querySelector('.cat-head') as HTMLElement;
             if(head) head.style.transform = '';
         });
     }
 
-    function createPawPrints(startX, startY, endX, endY, container) {
+    function createPawPrints(startX: number, startY: number, endX: number, endY: number, container: HTMLElement) {
         const distance = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
-        const steps = Math.floor(distance / 25); 
+        const steps = Math.floor(distance / 30); 
 
         for (let i = 0; i < steps; i++) {
             setTimeout(() => {
@@ -180,7 +177,7 @@
                 `;
                 container.appendChild(paw);
                 setTimeout(() => paw.remove(), 2000);
-            }, i * 50); // Faster paw print generation
+            }, i * 40);
         }
     }
 
@@ -199,14 +196,14 @@
 </script>
 
 <style>
-    /* HERO TEXT STYLES (Unchanged) */
+    /* HERO TEXT STYLES */
     .hero-title { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
     .slide-in-left { display: inline-block; opacity: 1; transform: translateX(0); filter: blur(0); transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease, filter 1s ease; }
     .slide-in-left.initial-load { opacity: 0; transform: translateX(-50px); filter: blur(10px); }
     .line-1 { color: #e2e8f0; font-weight: 600; }
     .line-2 { background: linear-gradient(to right, var(--primary, #2563eb), var(--accent, #7c3aed)); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 700; transition-delay: 0.2s; }
 
-    /* === IMPROVED CAT CSS === */
+    /* === CAT CSS === */
     .stray-cat {
         position: absolute;
         width: 60px;
@@ -214,114 +211,58 @@
         top: 20px;
         left: 20px;
         z-index: 3;
-        /* Much faster walk cycle (15s) and faster bobbing (0.2s) */
-        animation: strayCatRun 15s linear infinite, catGallop 0.25s infinite alternate;
+        animation: strayCatRun 10s linear infinite, catGallop 0.22s infinite alternate;
         cursor: pointer;
         transform-origin: center bottom;
     }
 
-    /* Shared Color */
     .stray-cat div { background: #0f172a; position: absolute; }
 
-    /* Body - Sleeker shape */
     .cat-body {
-        width: 100%;
-        height: 100%;
-        border-radius: 20px 20px 20px 20px;
-        top: 0;
-        left: 0;
-        z-index: 10;
-        /* Slight rotation gives a running posture */
-        transform: rotate(-2deg);
+        width: 100%; height: 100%; border-radius: 20px;
+        top: 0; left: 0; z-index: 10;
+        transform: rotate(-1deg);
+        animation: bodyStretch 0.22s infinite alternate;
     }
 
-    /* Head */
     .cat-head {
-        width: 28px;
-        height: 28px;
-        border-radius: 45%;
-        top: -10px;
-        right: -10px; /* Forward leaning head */
-        z-index: 12;
+        width: 26px; height: 26px; border-radius: 45%;
+        top: -8px; right: -8px; z-index: 12;
         transition: transform 0.2s ease;
     }
 
-    /* Ears */
     .cat-ear {
         width: 0; height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-bottom: 14px solid #0f172a;
-        background: transparent !important;
-        position: absolute;
-        top: -8px;
+        border-left: 5px solid transparent; border-right: 5px solid transparent;
+        border-bottom: 12px solid #0f172a;
+        background: transparent !important; position: absolute; top: -8px;
     }
     .cat-ear.left { left: 2px; transform: rotate(-20deg); }
     .cat-ear.right { right: 2px; transform: rotate(20deg); }
 
-    /* Tail - Anchored correctly to body */
     .cat-tail {
-        width: 45px;
-        height: 6px;
-        border-radius: 3px;
-        /* Pivot point set to the very right edge where it connects to body */
-        transform-origin: 100% 50%; 
-        top: 5px; /* Aligned with upper body */
-        left: -35px; /* Stick out the back */
-        animation: tailWhip 0.5s ease-in-out infinite alternate;
+        width: 45px; height: 5px; border-radius: 3px;
+        transform-origin: 100% 50%; top: 6px; left: -32px;
+        animation: tailWhip 0.44s ease-in-out infinite alternate;
         z-index: 5;
     }
 
-    /* Legs - Tapered and angled */
     .cat-leg {
-        width: 7px;
-        height: 22px;
-        border-radius: 4px;
-        transform-origin: top center;
-        z-index: 5;
-        top: 20px; /* Attach to bottom of body */
+        width: 7px; height: 22px; border-radius: 4px;
+        transform-origin: top center; z-index: 5; top: 18px; 
     }
 
-    /* Leg Animation: 0.5s full cycle = very fast run */
-    .front-right { right: 8px; animation: runCycle 0.5s infinite linear; }
-    .front-left  { right: 8px; animation: runCycle 0.5s infinite linear 0.25s; z-index: 2; opacity: 0.7; }
-    
-    .back-right  { left: 8px; animation: runCycle 0.5s infinite linear 0.1s; }
-    .back-left   { left: 8px; animation: runCycle 0.5s infinite linear 0.35s; z-index: 2; opacity: 0.7; }
+    .front-right { right: 8px; animation: runCycle 0.44s infinite linear; }
+    .front-left  { right: 8px; animation: runCycle 0.44s infinite linear 0.22s; z-index: 2; opacity: 0.7; }
+    .back-right  { left: 8px; animation: runCycle 0.44s infinite linear 0.11s; }
+    .back-left   { left: 8px; animation: runCycle 0.44s infinite linear 0.33s; z-index: 2; opacity: 0.7; }
 
-    /* --- Keyframes --- */
+    @keyframes bodyStretch { 0% { transform: scaleX(1) rotate(-1deg); } 100% { transform: scaleX(1.05) rotate(0deg); } }
+    @keyframes runCycle { 0% { transform: rotate(35deg) translateY(-3px); } 25% { transform: rotate(0deg) translateY(0); } 50% { transform: rotate(-45deg) translateY(-3px); } 75% { transform: rotate(0deg) translateY(0); } 100% { transform: rotate(35deg) translateY(-3px); } }
+    @keyframes tailWhip { 0% { transform: rotate(-5deg); } 100% { transform: rotate(10deg); } }
+    @keyframes catGallop { 0% { margin-top: 0; } 100% { margin-top: 3px; } }
+    @keyframes strayCatRun { 0% { left: -10%; transform: scaleX(1); } 45% { left: 40%; transform: scaleX(1); } 48% { left: 40%; transform: scaleX(-1); } 95% { left: -10%; transform: scaleX(-1); } 100% { left: -10%; transform: scaleX(1); } }
 
-    /* Aggressive running leg motion */
-    @keyframes runCycle {
-        0%   { transform: rotate(35deg) translateY(-2px); }
-        25%  { transform: rotate(0deg) translateY(0); }
-        50%  { transform: rotate(-35deg) translateY(-2px); }
-        75%  { transform: rotate(0deg) translateY(0); }
-        100% { transform: rotate(35deg) translateY(-2px); }
-    }
-
-    /* Whipping tail for speed */
-    @keyframes tailWhip {
-        0% { transform: rotate(-10deg); }
-        100% { transform: rotate(15deg); }
-    }
-
-    /* Bouncy running body */
-    @keyframes catGallop {
-        0% { margin-top: 0; }
-        100% { margin-top: 4px; }
-    }
-
-    /* Fast path across screen */
-    @keyframes strayCatRun {
-        0%   { left: -10%; transform: scaleX(1); }
-        45%  { left: 40%; transform: scaleX(1); }
-        48%  { left: 40%; transform: scaleX(-1); } /* Fast turn */
-        95%  { left: -10%; transform: scaleX(-1); }
-        100% { left: -10%; transform: scaleX(1); }
-    }
-
-    /* Mobile Hide */
     @media (max-width: 768px) {
         .stray-cat { display: none; }
         .hero-title { font-size: 2.2rem; }
