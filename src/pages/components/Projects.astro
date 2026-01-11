@@ -1,0 +1,429 @@
+---
+import { Image } from "astro:assets";
+// You would need to import the local image first
+import royaleImg from "./public/images/royale-serenity.png";
+import sikkimImg from "./public/images/sikkim.png";
+---
+
+<section id="projects" class="projects-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="header-subtitle">PORTFOLIO</span>
+            <h2>Featured Projects</h2>
+            <div class="header-line"></div>
+            <p>
+                Scalable solutions engineered for enterprise and government
+                sectors.
+            </p>
+        </div>
+
+        <div class="projects-grid">
+            <article class="project-card fade-in">
+                <div class="card-image-wrapper">
+                    <div class="image-overlay"></div>
+                    <Image
+                        src={royaleImg}
+                        alt="The Royale Serenity Website"
+                        class="website-shot"
+                        width={800}
+                        quality="mid"
+                    />
+                    <a
+                        href="https://royaleserenity.in"
+                        target="_blank"
+                        class="view-btn"
+                    >
+                        View Live <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="card-content">
+                    <div class="card-header-row">
+                        <h3 class="project-title">The Royale Serenity</h3>
+                        <span class="status-badge live">
+                            <span class="dot"></span> Live
+                        </span>
+                    </div>
+
+                    <p class="project-desc">
+                        A high-performance luxury hotel platform featuring a
+                        custom-built booking engine, dynamic gallery
+                        implementations, and SEO-optimized architecture.
+                    </p>
+
+                    <div class="tech-stack-container">
+                        <div class="tech-label">Technologies</div>
+                        <div class="tech-list">
+                            <span class="tech-pill"
+                                ><i class="fab fa-js"></i> JavaScript</span
+                            >
+                            <span class="tech-pill"
+                                ><i class="fas fa-rocket"></i> Astro</span
+                            >
+                            <span class="tech-pill"
+                                ><i class="fab fa-css3-alt"></i> Tailwind</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card fade-in">
+                <div class="card-image-wrapper">
+                    <div class="abstract-pattern">
+                        <Image
+                            src={sikkimImg}
+                            alt="Govt of Sikkim Logo"
+                            class="logo-bg"
+                            width={800}
+                            quality="mid"
+                        />
+                        <div class="grid-lines"></div>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="card-header-row">
+                        <h3 class="project-title">Project PRANALI (IFMIS)</h3>
+                        <span class="status-badge internal">
+                            <i class="fas fa-lock"></i> Restricted
+                        </span>
+                    </div>
+
+                    <p class="project-desc">
+                        A mission-critical State Integrated Financial Management
+                        System. Orchestrates payroll processing for 80,000+
+                        government employees with real-time treasury
+                        integration.
+                    </p>
+
+                    <div class="tech-stack-container">
+                        <div class="tech-label">Core Stack</div>
+                        <div class="tech-list">
+                            <span class="tech-pill"
+                                ><i class="fab fa-angular"></i> Angular</span
+                            >
+                            <span class="tech-pill"
+                                ><i class="fas fa-server"></i> .NET Core</span
+                            >
+                            <span class="tech-pill"
+                                ><i class="fas fa-database"></i> MySQL</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ... (Keep your existing Section & Grid Styling) ... */
+    .projects-section {
+        position: relative;
+        padding: 120px 0;
+        background:
+            radial-gradient(
+                circle at 15% 50%,
+                rgba(37, 99, 235, 0.05) 0%,
+                transparent 25%
+            ),
+            radial-gradient(
+                circle at 85% 30%,
+                rgba(124, 58, 237, 0.05) 0%,
+                transparent 25%
+            );
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 80px;
+    }
+
+    .header-subtitle {
+        font-size: 0.85rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--primary);
+        font-weight: 600;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .header-line {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        margin: 20px auto;
+        border-radius: 2px;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 40px;
+        perspective: 1000px;
+    }
+
+    /* Card Styling */
+    .project-card {
+        background: rgba(30, 41, 59, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        flex-direction: column;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+    }
+
+    .project-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(37, 99, 235, 0.3);
+        box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.2);
+    }
+
+    /* === IMAGE FIXES === */
+    .card-image-wrapper {
+        position: relative;
+        height: 240px;
+        overflow: hidden;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        background: #0f172a; /* Dark background to hide gaps if images don't fill */
+    }
+
+    /* 1. Website Screenshot Fix */
+    .website-shot {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Fill the whole area */
+        object-position: top center; /* Anchor to the top (shows the navbar/header) */
+        transition: transform 0.7s ease;
+    }
+
+    .project-card:hover .website-shot {
+        transform: scale(1.05);
+    }
+
+    /* 2. Sikkim Logo Fix */
+    .abstract-pattern {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .logo-bg {
+        position: absolute;
+        width: 100%; /* Reduce size so it doesn't touch edges */
+        height: 100%;
+        object-fit: contain; /* Ensure the WHOLE logo is visible */
+        z-index: 1;
+        transition: all 0.5s ease;
+    }
+
+    .project-card:hover .logo-bg {
+        transform: scale(1.1);
+        opacity: 0.5; /* Make it more visible on hover */
+    }
+
+    /* Image Overlay */
+    .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(15, 23, 42, 0.8), transparent);
+        z-index: 1;
+        opacity: 0.6;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .project-card:hover .image-overlay {
+        opacity: 0.4;
+    }
+
+    .grid-lines {
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.05) 1px,
+                transparent 1px
+            );
+        background-size: 30px 30px;
+        opacity: 0.3;
+        z-index: 2;
+    }
+
+    .lock-icon-wrapper {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgba(37, 99, 235, 0.2);
+        border: 1px solid rgba(37, 99, 235, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--primary);
+        z-index: 5; /* Ensure lock sits on top of logo */
+        box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+        backdrop-filter: blur(5px);
+    }
+
+    /* View Button */
+    .view-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        background: white;
+        color: #0f172a;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        opacity: 0;
+        z-index: 10;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-card:hover .view-btn {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .view-btn:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+    /* Content Styling (Keep existing) */
+    .card-content {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    .card-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    .project-title {
+        font-size: 1.35rem;
+        color: var(--light);
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .status-badge {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .status-badge.live {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .status-badge.internal {
+        background: rgba(99, 102, 241, 0.1);
+        color: #818cf8;
+        border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+    .dot {
+        width: 6px;
+        height: 6px;
+        background: currentColor;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    .project-desc {
+        color: var(--gray);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 25px;
+        flex-grow: 1;
+    }
+
+    .tech-stack-container {
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 20px;
+    }
+    .tech-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: #64748b;
+        margin-bottom: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+    .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .tech-pill {
+        font-size: 0.8rem;
+        padding: 6px 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        color: #94a3b8;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .tech-pill:hover {
+        background: rgba(37, 99, 235, 0.1);
+        border-color: rgba(37, 99, 235, 0.3);
+        color: var(--light);
+        transform: translateY(-1px);
+    }
+
+    @keyframes pulse {
+        0% {
+            opacity: 1;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+        }
+        70% {
+            opacity: 0.7;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0);
+        }
+        100% {
+            opacity: 1;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+        .card-image-wrapper {
+            height: 200px;
+        }
+    }
+</style>

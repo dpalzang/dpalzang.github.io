@@ -1,0 +1,128 @@
+<section id="skills" class="skills-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Technical Arsenal</h2>
+            <p>A comprehensive toolkit for building scalable, full-stack applications.</p>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-category-card fade-in">
+                <div class="category-header">
+                    <div class="icon-box"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Frontend</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag"><i class="fab fa-angular"></i> Angular</span>
+                    <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+                    <span class="skill-tag"><i class="fas fa-rocket"></i> Astro</span>
+                    <span class="skill-tag"><i class="fab fa-bootstrap"></i> Bootstrap</span>
+                    <span class="skill-tag"><i class="fab fa-css3"></i> Tailwind</span>
+                </div>
+            </div>
+
+            <div class="skill-category-card fade-in">
+                <div class="category-header">
+                    <div class="icon-box"><i class="fas fa-server"></i></div>
+                    <h3>Backend</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag"><i class="fas fa-code"></i> .NET Core</span>
+                    <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+                    <span class="skill-tag"><i class="fab fa-node"></i> Node.js</span>
+                    <span class="skill-tag"><i class="fas fa-database"></i> MySQL</span>
+                </div>
+            </div>
+
+            <div class="skill-category-card fade-in">
+                <div class="category-header">
+                    <div class="icon-box"><i class="fas fa-tools"></i></div>
+                    <h3>Tools & Infra</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag"><i class="fas fa-bolt"></i> Kafka</span>
+                    <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
+                    <span class="skill-tag"><i class="fas fa-cloud"></i> Postman</span>
+                    <span class="skill-tag"><i class="fas fa-project-diagram"></i> Microservices</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .skills-section { padding: 100px 0; position: relative; }
+    
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .skill-category-card {
+        background: var(--card-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 30px;
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease;
+    }
+
+    .skill-category-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    .category-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 25px;
+        border-bottom: 1px solid var(--glass-border);
+        padding-bottom: 15px;
+    }
+
+    .icon-box {
+        width: 50px;
+        height: 50px;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .category-header h3 {
+        font-size: 1.4rem;
+        margin: 0;
+        color: var(--light);
+    }
+
+    .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .skill-tag {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        padding: 8px 16px;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        color: #cbd5e1;
+        transition: all 0.2s ease;
+    }
+
+    .skill-tag i { color: var(--primary); }
+
+    .skill-tag:hover {
+        background: rgba(37, 99, 235, 0.15);
+        color: white;
+        border-color: var(--primary);
+    }
+</style>

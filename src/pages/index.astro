@@ -1,0 +1,73 @@
+---
+import Layout from './layouts/Layout.astro';
+import Navbar from './components/Navbar.astro';
+import Hero from './components/Hero.astro';
+import Skills from './components/Skills.astro';
+import Projects from './components/Projects.astro';
+import Experience from './components/Experience.astro';
+import Contact from './components/Contact.astro';
+import Footer from './components/Footer.astro';
+---
+
+<Layout title="Dorjee Palzang Bhutia | Full Stack Developer">
+	<Navbar />
+	<main>
+		<Hero />
+		<Skills />
+		<Projects />
+		<Experience />
+		<Contact />
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+    // Global Scroll Animations (Fade In & Parallax)
+    
+    // 1. Fade In Observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Astro processes scripts as modules, so we need to wait for DOM to load 
+    // or run this immediately if components are rendered.
+    document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+    });
+
+    // 2. Parallax Text Animation
+    const heroText = document.querySelector('.slide-in-left');
+    if (heroText) {
+        heroText.classList.add('initial-load');
+        setTimeout(() => {
+            heroText.classList.remove('initial-load');
+        }, 1000);
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const speed = 0.5; 
+            
+            if (scrollY < window.innerHeight) {
+                const xMove = -scrollY * speed; 
+                const opacity = 1 - (scrollY / 600);
+                const blur = Math.min(scrollY / 40, 10);
+
+                if (opacity > 0) {
+                    // Type assertion for TS if needed, or just standard JS
+                    (heroText as HTMLElement).style.transform = `translateX(${xMove}px)`;
+                    (heroText as HTMLElement).style.opacity = opacity.toString();
+                    (heroText as HTMLElement).style.filter = `blur(${blur}px)`;
+                }
+            }
+        });
+    }
+</script>
